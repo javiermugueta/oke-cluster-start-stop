@@ -1,0 +1,137 @@
+#!/bin/bash
+# javier.mugueta
+#
+usage(){
+    echo ""
+    echo "      Usage: kubectl oke-cluster-start-stop -r=[region] -c=[compartment name] -k=[k8s cluster] -o=[START|STOP]"
+    echo "      -r=[region], one of {ca-toronto-1, eu-frankfurt-1, uk-london-1, us-ashburn-1, us-gov-ashburn-1, us-gov-chicago-1, us-gov-phoenix-1, us-langley-1, us-luke-1, us-phoenix-1}"
+    echo "      -o=[START|STOP]"
+    echo "      -k=[name (case sensitive) of the k8s cluster]"
+    echo "      -c=[compartment name (case sensitive) of the compartment the cluster belongs to]"
+    echo "      Example: kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=START"
+}
+#
+# if jq not installed do it (homebrew needed)
+(brew list jq || brew install jq) >/dev/null 2>&1
+#
+MAX_WAIT_TIME=120
+PROFILE="okecmd"
+for i in "$@"
+do
+case $i in
+    -o=*)
+    COMMAND="${i#*=}"
+    shift
+    ;;
+    -r=*)
+    REGION="${i#*=}"
+    shift
+    ;;
+    -c=*)
+    COMPARTMENT="${i#*=}"
+    shift
+    ;;
+    -k=*)
+    CLUSTER="${i#*=}"
+    shift
+    ;;
+    *)
+          usage
+          exit
+    ;;
+esac
+done
+#
+if [[ $COMMAND == "START" ]]
+    then
+        STATE="RUNNING"
+elif [[ $COMMAND == "STOP" ]]
+    then
+        STATE="STOPPED"
+fi
+#
+usage
+#
+echo ""
+echo "region          = ${REGION}"
+echo "compartment     = ${COMPARTMENT}"
+echo "k8scluster      = ${CLUSTER}"
+echo "operation       = ${COMMAND}"
+echo ""
+#
+# session
+result=`oci session validate --profile $PROFILE --auth security_token`
+if [ $? -ne 0 ] ; then
+    printf $PROFILE | oci session authenticate --region $REGION
+fi
+
+if [[ $result =~ "valid until" ]]; then
+    printf $PROFILE | oci session authenticate --region $REGION
+else
+    echo $result
+fi
+#
+# get compartment ocid from pretty name
+compartments_data=`oci iam compartment list --profile $PROFILE --auth security_token --all`
+compartments_list=`echo $compartments_data | jq .data`
+compartments_count=`echo $compartments_data | jq '.data | length'`
+for i in $(eval echo {0..$compartments_count})
+do
+    description=`echo $compartments_list | jq .[$i].description`
+    description=$(eval echo $description)
+    if [[ $COMPARTMENT == $description ]]
+    then
+        compartment_id=`echo $compartments_list | jq .[$i].id`
+        compartment_id=$(eval echo $compartment_id)
+    fi
+done
+# list of oke clusters
+clusterinfo=`oci ce cluster list --compartment-id $compartment_id --profile $PROFILE --auth security_token`
+count=`echo $clusterinfo | jq '.data | length'`
+count=`expr $count - 1`
+for i in $(eval echo {0..$count})
+do
+    name=`echo $clusterinfo | jq .data[$i].name`
+    name=$(eval echo $name)
+    if [[ $CLUSTER == $name ]]
+    then
+        id=`echo $clusterinfo | jq .data[$i].id`
+        id=$(eval echo $id)
+        # got the id of the cluster I wanna operate with
+        CLUSTER_ID=$id
+    fi
+done
+# list of nodepools
+nodepoolinfo=`oci ce node-pool list --compartment-id $compartment_id --profile $PROFILE --auth security_token`
+nodepoolinfo="${nodepoolinfo//cluster-id/cluster_id}"
+count=`echo $nodepoolinfo | jq '.data | length'`
+count=`expr $count - 1`
+for i in $(eval echo {0..$count})
+do
+    id=`echo $nodepoolinfo | jq .data[$i].id`
+    id=$(eval echo $id)
+    name=`echo $nodepoolinfo | jq .data[$i].name`
+    cluster=`echo $nodepoolinfo | jq .data[$i].cluster_id`
+    cluster=$(eval echo $cluster)
+    # which nodepools belong to my cluster?
+    if [[ $CLUSTER_ID == $cluster ]]
+    then
+        # get the compute nodes of each pool
+        data=`oci ce node-pool get --node-pool-id $id --profile $PROFILE --auth security_token`
+        count=`echo $data | jq '.data.nodes | length'`
+        count=`expr $count - 1`
+        nodes=`echo $data | jq .data.nodes`
+        echo "Proceeding with pool $name of cluster $cluster"
+        for i in $(eval echo {0..$count})
+        do
+            nodeid=`echo $nodes | jq .[$i].id`
+            nodeid=$(eval echo $nodeid)
+            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid --wait-for-state $STATE --max-wait-seconds $MAX_WAIT_TIME --profile $PROFILE --auth security_token"
+            echo "      ${COMMAND}ing node $nodeid"
+            # issue command
+            ($cmd >/dev/null 2>&1)
+        done
+    fi
+done
+echo "Done, have a good day!"
+exit

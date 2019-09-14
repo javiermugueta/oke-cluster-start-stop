@@ -1,4 +1,4 @@
-# okecmd
+# oke-cluster-start-stop
 A kubectl extension plugin
 
 ## purpose
@@ -27,14 +27,13 @@ https://brew.sh
 https://github.com/kubernetes-sigs/krew <br>
 
 ```
-kubectl krew install okecmd
+kubectl krew install oke-cluster-start-stop
 ```
 ## remove
 ```
 kubectl krew remove okecmd
 ```
-
-## test
+## verify
 ### list of plugins installed
 ```
 (⎈ |mhifra:sample-coherence-ns)MacBook-Pro:okecmd javiermugueta$ kubectl krew list
@@ -46,12 +45,12 @@ rbac-view         2a3a6cca926bfa2c4116b76f376047946f4188f7f2129ac3c5cb9fe29b7c17
 resource-capacity 685c964d0416c23f70b75fdd73fdda5a32f4331125892a9415977f8dd3553050
 view-utilization  ae96c8c2234ae7e66936c6c4c7c1260f1c51d46cfa3b836c49cfd3ab991d93f8
 ```
-### test the tool with an existing cluster
+### verify the tool with your existing cluster(exampke)
 ```
 kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 ```
 
-### output example
+### example output
 ```
 (⎈ |mhifra:sample-coherence-ns)MacBook-Pro:okecmd javiermugueta$ kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
