@@ -54,7 +54,7 @@ cd oke-cluster-start-stop
 kubectl krew install --manifest=oke-cluster-start-stop.yaml --archive=oke-cluster-start-stop-1.0.0.zip
 ```
 ### cloud account
-If you don't have an OCI account brab for a free one here: https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ow:o:p:nav:0912BCButton  
+If you don't have an OCI account grab a free one here: https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ow:o:p:nav:0912BCButton  
 
 ## remove
 ```
