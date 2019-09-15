@@ -18,11 +18,11 @@ Session was deemed invalid by service
     Completed browser authentication process!  
 ...  
 
-![Click on Continue](https://github.com/javiermugueta/okecmd/blob/master/a.jpg)
+![Click on Continue](https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/a.jpg)
 <br>
-![Sign in](https://github.com/javiermugueta/okecmd/blob/master/c.jpg)
+![Sign in](https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/c.jpg)
 <br>
-![Close the browser tab when done](https://github.com/javiermugueta/okecmd/blob/master/b.jpg)
+![Close the browser tab when done](https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/b.jpg)
 <br>
 At any time you can terminate the session issuing the following
 ```
