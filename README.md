@@ -33,7 +33,7 @@ https://brew.sh
 #### krew
 https://github.com/kubernetes-sigs/krew <br>
 ## install
-### from krew-index
+### from krew-index (not yet available, pending on approvals)
 ```
 kubectl krew install oke-cluster-start-stop
 ```
