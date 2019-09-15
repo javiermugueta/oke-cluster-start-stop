@@ -5,6 +5,11 @@ A kubectl extension plugin
 Starts or stops all the compute nodes of an OKE cluster
 ## notes
 The first time you use the tool or when the session gets invalidated, the tool issues on behalf you an "oci session authenticate" command that opens up a browser for you to log in you cloud account.<br>
+...
+Session was deemed invalid by service<br>
+    Please switch to newly opened browser window to log in!<br>
+    Completed browser authentication process!<br>
+...<br>
 ![Click on Continue](https://github.com/javiermugueta/okecmd/blob/master/a.jpg)
 <br>
 ![Sign in](https://github.com/javiermugueta/okecmd/blob/master/c.jpg)
@@ -52,21 +57,28 @@ kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
 ### example output
 ```
-(⎈ |mhifra:sample-coherence-ns)MacBook-Pro:okecmd javiermugueta$ kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
+(⎈ |mhifra:sample-coherence-ns)MacBook-Pro:oke-cluster-start-stop javiermugueta$ kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
-      Usage: kubectl okecmd -r=[region] -c=[compartment name] -k=[k8s cluster] -o=[START|STOP]
+      Usage: kubectl oke-cluster-start-stop -r=[region] -c=[compartment name] -k=[k8s cluster] -o=[START|STOP]
       -r=[region], one of {ca-toronto-1, eu-frankfurt-1, uk-london-1, us-ashburn-1, us-gov-ashburn-1, us-gov-chicago-1, us-gov-phoenix-1, us-langley-1, us-luke-1, us-phoenix-1}
       -o=[START|STOP]
       -k=[name (case sensitive) of the k8s cluster]
       -c=[compartment name (case sensitive) of the compartment the cluster belongs to]
-      Example: kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=START
+      Example: kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=START
 
 region          = eu-frankfurt-1
 compartment     = brazaletes
 k8scluster      = cluster2
 operation       = STOP
 
-Session is valid until 2019-09-14 07:01:01
+Session was deemed invalid by service
+    Please switch to newly opened browser window to log in!
+    Completed browser authentication process!
+Enter the name of the profile you would like to create: Config written to: /Users/javiermugueta/.oci/config
+
+    Try out your newly created session credentials with the following example command:
+
+    oci iam region list --config-file /Users/javiermugueta/.oci/config --profile okecmd --auth security_token
 
 Proceeding with pool "pool1" of cluster ocid1.cluster.oc1.eu-frankfurt-1.aaaaaaaaaftgeobqga3ggnjrgq2tknrqgjswimbvmrtdombugc3wmmzwhezt
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljspabpo3eh3ats47uahjjr2xoikrzubsggawbnfzarxpufhr2mzyia

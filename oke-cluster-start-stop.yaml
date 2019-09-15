@@ -1,7 +1,7 @@
 apiVersion: krew.googlecontainertools.github.com/v1alpha2
 kind: Plugin
 metadata:
-  name: okecmd
+  name: oke-cluster-start-stop
 spec:
   version: "v1.0.1"
   platforms:
@@ -10,16 +10,15 @@ spec:
       - {key: os, operator: In, values: [darwin, linux]}
     uri: https://github.com/javiermugueta/oke-cluster-start-stop/releases/download/1.0.0/oke-cluster-start-stop-1.0.0.zip
     sha256: "72b48eebd1b7bc71eca2573274d4ef7b7fb91e6806d873ba815e12a880741a68"
-    # copy the used files out of the zip archive, defaults to `[{from: "*", to: "."}]`
     files:
-    - from: "./kubectl-okecmd" # path to the files extracted from archive
+    - from: "./kubectl-oke-cluster-start-stop"
       to: "."
-    bin: "./kubectl-okecmd"
+    bin: "./kubectl-oke-cluster-start-stop"
   shortDescription: Starts/stops compute nodes in OKE cluster.
   homepage: https://github.com/javiermugueta/okecmd 
   caveats: |
     This plugin needs the following programs:
     * homebrew
-    * jq
+    * jq (it is installed automatically in case it is not)
   description: |
     This plugin starts or stops all the compute nodes of a k8s cluster in Oracle Kubernetes Engine (OKE).
