@@ -15,7 +15,7 @@ spec:
       to: "."
     bin: "./kubectl-oke-cluster-start-stop"
   shortDescription: Starts/stops compute nodes in OKE cluster.
-  homepage: https://github.com/javiermugueta/okecmd 
+  homepage: https://github.com/javiermugueta/oke-cluster-start-stop 
   caveats: |
     This plugin needs the following programs:
     * homebrew
