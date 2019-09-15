@@ -30,10 +30,18 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos
 https://brew.sh
 #### krew
 https://github.com/kubernetes-sigs/krew <br>
-
+## install
+###from krew-index
 ```
 kubectl krew install oke-cluster-start-stop
 ```
+### locally
+```
+git clone https://github.com/javiermugueta/oke-cluster-start-stop.git
+cd oke-cluster-start-stop
+kubectl krew install --manifest=oke-cluster-start-stop.yaml --archive=oke-cluster-start-stop-1.0.0.zip
+```
+
 ## remove
 ```
 kubectl krew remove okecmd
