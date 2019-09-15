@@ -4,12 +4,14 @@ A kubectl extension plugin
 ## purpose
 Starts or stops all the compute nodes of an OKE cluster
 ## notes
-<p>The first time you use the tool or when the session gets invalidated, the tool issues on behalf you an "oci session authenticate" command that opens up a browser for you to log in you cloud account.</p>
-<p>...
-Session was deemed invalid by service
-    Please switch to newly opened browser window to log in!
-    Completed browser authentication process!
-...</p>
+The first time you use the tool or when the session gets invalidated,  
+the tool issues on behalf you an "oci session authenticate"  
+command that opens up a browser for you to log in you cloud account.
+...  
+Session was deemed invalid by service  
+    Please switch to newly opened browser window to log in!  
+    Completed browser authentication process!  
+...  
 ![Click on Continue](https://github.com/javiermugueta/okecmd/blob/master/a.jpg)
 <br>
 ![Sign in](https://github.com/javiermugueta/okecmd/blob/master/c.jpg)
