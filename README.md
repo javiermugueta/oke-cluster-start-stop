@@ -24,7 +24,8 @@ Session was deemed invalid by service
 <br>
 ![Close the browser tab when done](https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/b.jpg)
 <br>
-At any time you can terminate the session issuing the following
+At any time you can terminate the session issuing the following or just  
+let the session expire as time goes by.
 ```
 oci session terminate --profile okecmd --auth security_token
 ```
