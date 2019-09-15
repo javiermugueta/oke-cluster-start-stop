@@ -50,6 +50,8 @@ git clone https://github.com/javiermugueta/oke-cluster-start-stop.git
 cd oke-cluster-start-stop
 kubectl krew install --manifest=oke-cluster-start-stop.yaml --archive=oke-cluster-start-stop-1.0.0.zip
 ```
+### cloud account
+If you don't have an OCI account brab for a free one here: https://www.oracle.com/try-it.html?source=:ow:o:p:nav:0912BCButton&intcmp=:ow:o:p:nav:0912BCButton
 
 ## remove
 ```
