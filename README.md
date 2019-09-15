@@ -21,7 +21,7 @@ At any time you can terminate the session issuing the following
 oci session terminate --profile okecmd --auth security_token
 ```
 ## installation 
-### Prereqs
+### prereqs
 #### oci cli
 https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm
 #### kubectl
