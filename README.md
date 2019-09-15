@@ -9,8 +9,8 @@ seeks for the internal ocids for you.
 
 The first time you use the tool, or when the session gets invalidated,  
 an "oci session authenticate" command is launched and a
-new browser windows pops up for you to log in with  
-appropriate credentials for the cloud account you wqnt work with.  
+new browser window pops up for you to log in with  
+appropriate credentials in Oracle Cloud.  
 
 ...  
 Session was deemed invalid by service  
