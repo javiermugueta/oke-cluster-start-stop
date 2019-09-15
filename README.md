@@ -8,7 +8,7 @@ Unlike standard oci CLI commands, we use pretty names and the tool
 seeks for the internal ocids for you.  
 
 The first time you use the tool, or when the session gets invalidated,  
-an "oci session authenticate" command is launched and a
+an "oci session authenticate" command is launched and a  
 new browser window pops up for you to log in with  
 appropriate credentials in Oracle Cloud.  
 
