@@ -24,13 +24,14 @@ Session was deemed invalid by service
 <br>
 ![Close the browser tab when done](https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/b.jpg)
 <br>
-At any time you can terminate the session issuing the following or just  
-let the session expire as time goes by.  
-NOTE: Don't forget to end the session if you want to change from one cloud account (tenant) to a different one!!!  
-NOTE: Remember to change the tennant clicking in the [Change tenant] link in the Sing In page
+At any time you can terminate the session issuing the following  
 ```
 oci session terminate --profile okecmd --auth security_token
 ```
+...or just let the session expire as time goes by.  
+
+NOTE: Don't forget to end the session if you want to change from one cloud account (tenant) to a different one!!!  
+NOTE: Remember to change the tennant clicking in the [Change tenant] link in the Sing In page
 ## installation 
 ### prereqs
 #### oci cli
