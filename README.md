@@ -4,12 +4,12 @@ A kubectl extension plugin
 ## purpose
 Starts or stops all the compute nodes of an OKE cluster
 ## notes
-The first time you use the tool or when the session gets invalidated, the tool issues on behalf you an "oci session authenticate" command that opens up a browser for you to log in you cloud account.<br>
-...
-Session was deemed invalid by service<br>
-    Please switch to newly opened browser window to log in!<br>
-    Completed browser authentication process!<br>
-...<br>
+<p>The first time you use the tool or when the session gets invalidated, the tool issues on behalf you an "oci session authenticate" command that opens up a browser for you to log in you cloud account.</p>
+<p>...
+Session was deemed invalid by service
+    Please switch to newly opened browser window to log in!
+    Completed browser authentication process!
+...</p>
 ![Click on Continue](https://github.com/javiermugueta/okecmd/blob/master/a.jpg)
 <br>
 ![Sign in](https://github.com/javiermugueta/okecmd/blob/master/c.jpg)
@@ -49,14 +49,15 @@ kubectl krew remove okecmd
 ## verify
 ### list of plugins installed
 ```
-(⎈ |mhifra:sample-coherence-ns)MacBook-Pro:okecmd javiermugueta$ kubectl krew list
-PLUGIN            VERSION
-access-matrix     7a16c61dfc4e2924fdedc894d59db7820bc4643a58d9a853c4eb83eadd4deee8
-krew              dc2f2e1ec8a0acb6f3e23580d4a8b38c44823e948c40342e13ff6e8e12edb15a
-okecmd            6f8315746febfb97f61ce63822fcdb2cd430917753367e2a865cd29620e49477
-rbac-view         2a3a6cca926bfa2c4116b76f376047946f4188f7f2129ac3c5cb9fe29b7c176d
-resource-capacity 685c964d0416c23f70b75fdd73fdda5a32f4331125892a9415977f8dd3553050
-view-utilization  ae96c8c2234ae7e66936c6c4c7c1260f1c51d46cfa3b836c49cfd3ab991d93f8
+(⎈ |mhifra:sample-coherence-ns)MacBook-Pro:oke-cluster-start-stop javiermugueta$ **kubectl krew list**
+PLUGIN                 VERSION
+access-matrix          7a16c61dfc4e2924fdedc894d59db7820bc4643a58d9a853c4eb83eadd4deee8
+krew                   dc2f2e1ec8a0acb6f3e23580d4a8b38c44823e948c40342e13ff6e8e12edb15a
+**oke-cluster-start-stop 72b48eebd1b7bc71eca2573274d4ef7b7fb91e6806d873ba815e12a880741a68**
+okecmd                 72b48eebd1b7bc71eca2573274d4ef7b7fb91e6806d873ba815e12a880741a68
+rbac-view              2a3a6cca926bfa2c4116b76f376047946f4188f7f2129ac3c5cb9fe29b7c176d
+resource-capacity      685c964d0416c23f70b75fdd73fdda5a32f4331125892a9415977f8dd3553050
+view-utilization       ae96c8c2234ae7e66936c6c4c7c1260f1c51d46cfa3b836c49cfd3ab991d93f8
 ```
 ### verify the tool with your existing cluster(exampke)
 ```
