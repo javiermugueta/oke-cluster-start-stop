@@ -80,7 +80,7 @@ kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
 ### example output
 ```
-javiermugueta:oke-cluster-start-stop javiermugueta$ ./kubectl-oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
+javiermugueta:oke-cluster-start-stop javiermugueta$ kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
 region          = eu-frankfurt-1
 compartment     = brazaletes
