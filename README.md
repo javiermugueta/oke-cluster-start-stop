@@ -54,7 +54,7 @@ cd oke-cluster-start-stop
 kubectl krew install --manifest=oke-cluster-start-stop.yaml --archive=oke-cluster-start-stop-1.0.0.zip
 ```
 ### cloud account
-If you don't have an OCI account grab a free one here: https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ow:o:p:nav:0912BCButton  
+If you don't have an OCI account grab for a free one here: https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ow:o:p:nav:0912BCButton  
 
 ## remove
 ```
@@ -80,34 +80,23 @@ kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
 ### example output
 ```
-(⎈ |mhifra:sample-coherence-ns)MacBook-Pro:oke-cluster-start-stop javiermugueta$ kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
-
-      Usage: kubectl oke-cluster-start-stop -r=[region] -c=[compartment name] -k=[k8s cluster] -o=[START|STOP]
-      -r=[region], one of {ca-toronto-1, eu-frankfurt-1, uk-london-1, us-ashburn-1, us-gov-ashburn-1, us-gov-chicago-1, us-gov-phoenix-1, us-langley-1, us-luke-1, us-phoenix-1}
-      -o=[START|STOP]
-      -k=[name (case sensitive) of the k8s cluster]
-      -c=[compartment name (case sensitive) of the compartment the cluster belongs to]
-      Example: kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=START
+javiermugueta:oke-cluster-start-stop javiermugueta$ ./kubectl-oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 
 region          = eu-frankfurt-1
 compartment     = brazaletes
 k8scluster      = cluster2
 operation       = STOP
 
-Session was deemed invalid by service
-    Please switch to newly opened browser window to log in!
-    Completed browser authentication process!
-Enter the name of the profile you would like to create: Config written to: /Users/javiermugueta/.oci/config
+Session is valid until 2019-09-17 14:51:51
 
-    Try out your newly created session credentials with the following example command:
-
-    oci iam region list --config-file /Users/javiermugueta/.oci/config --profile okecmd --auth security_token
-
-Proceeding with pool "pool1" of cluster ocid1.cluster.oc1.eu-frankfurt-1.aaaaaaaaaftgeobqga3ggnjrgq2tknrqgjswimbvmrtdombugc3wmmzwhezt
+Compartment brazaletes found!
+Cluster cluster2 found!
+Proceeding with pool "pool1"
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljspabpo3eh3ats47uahjjr2xoikrzubsggawbnfzarxpufhr2mzyia
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljrzjjdoor5pyw3q466x77rx3icrh6inlotvufkbxveiar62lbmxn6q
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljtm24kx2ptaxaylybhahnx4kvax3una5vr2o5ei7mbz7fowvbtfppa
-Proceeding with pool "polo4" of cluster ocid1.cluster.oc1.eu-frankfurt-1.aaaaaaaaaftgeobqga3ggnjrgq2tknrqgjswimbvmrtdombugc3wmmzwhezt
+Cluster cluster2 found!
+Proceeding with pool "polo4"
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljssh2ek5cyb3fzsah6fgep5khs7vjvch2qmjnszcy4eekqha766cyq
       STOPing node ocid1.instance.oc1.eu-frankfurt-1.abtheljtnar4qx3yhqhdqxgrxzfis47sfnlo2xvpbmgh564f7nk4lzt3gbdq
 Done, have a good day!
