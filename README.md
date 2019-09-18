@@ -46,12 +46,12 @@ brew install jq
 yum install jq
 #### krew
 https://github.com/kubernetes-sigs/krew <br>
-## install
-### from krew-index (not yet available, pending on approvals)
+### install plugin
+#### from krew-index (not yet available, pending on approvals)
 ```
 kubectl krew install oke-cluster-start-stop
 ```
-### locally
+#### locally
 ```
 git clone https://github.com/javiermugueta/oke-cluster-start-stop.git
 cd oke-cluster-start-stop
@@ -60,11 +60,11 @@ kubectl krew install --manifest=oke-cluster-start-stop.yaml --archive=oke-cluste
 ### cloud account
 If you don't have an OCI account grab for a free one here: https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ow:o:p:nav:0912BCButton  
 
-## remove
+## remove plugin
 ```
 kubectl krew remove okecmd
 ```
-## verify
+## try it!
 ### list of plugins installed
 ```
 (⎈ |mhifra:sample-coherence-ns)MacBook-Pro:oke-cluster-start-stop javiermugueta$ **kubectl krew list**
