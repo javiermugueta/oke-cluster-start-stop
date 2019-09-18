@@ -37,9 +37,13 @@ NOTE: Remember to change the tennant clicking in the [Change tenant] link in the
 #### oci cli
 https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm
 #### kubectl
-https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos
-#### homebrew
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+#### jq
+##### jq on mac
 https://brew.sh
+brew install jq
+##### jq on linux
+yum install jq
 #### krew
 https://github.com/kubernetes-sigs/krew <br>
 ## install
