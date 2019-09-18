@@ -40,11 +40,9 @@ https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
 #### jq
 ##### jq on mac
-https://brew.sh  
-
 brew install jq
 ##### jq on linux
-yum install jq
+sudo yum install jq
 #### krew
 https://github.com/kubernetes-sigs/krew <br>
 ### install plugin
