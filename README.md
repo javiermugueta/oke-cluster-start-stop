@@ -79,7 +79,7 @@ view-utilization       ae96c8c2234ae7e66936c6c4c7c1260f1c51d46cfa3b836c49cfd3ab9
 ```
 ### verify the tool with your existing cluster(example)
 ```
-kubectl okecmd -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
+kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=STOP
 ```
 
 ### example output
