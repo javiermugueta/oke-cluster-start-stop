@@ -9,7 +9,7 @@ spec:
       matchExpressions:
       - {key: os, operator: In, values: [darwin, linux]}
     uri: https://github.com/javiermugueta/oke-cluster-start-stop/releases/download/1.0.0/oke-cluster-start-stop-1.0.0.zip
-    sha256: "72b48eebd1b7bc71eca2573274d4ef7b7fb91e6806d873ba815e12a880741a68"
+    sha256: "2dd885ee706009b340ed1f3d9de2d342410879c0c957f2f540955eddf477a19e"
     files:
     - from: "./kubectl-oke-cluster-start-stop"
       to: "."
