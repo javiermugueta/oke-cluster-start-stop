@@ -163,10 +163,11 @@ do
         do
             nodeid=`echo $nodes | jq .[$i].id`
             nodeid=$(eval echo $nodeid)
-            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid --wait-for-state $WAITSTATE --max-wait-seconds $MAX_WAIT_TIME --profile $PROFILE "
+            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid  --profile $PROFILE "
             echo "      ${COMMAND}ing node $nodeid"
             # issue command
             ($cmd >/dev/null 2>&1)
+            #$cmd
         done
     fi
 done
