@@ -2,6 +2,7 @@
 # 1.0.0     javier.mugueta      15-sept-2019    new
 # 1.0.01    javier.mugueta      15-sept-2019    fix issue #1
 # 1.0.02    javier.mugueta      08-octo-2019    licenses
+# 1.0.03    javier.mugueta      16-dece-2019    removing wait-for-state
 #
 # Copyright (c) 2019 javier mugueta
 #
@@ -49,7 +50,7 @@ usage(){
     echo "      Example: kubectl oke-cluster-start-stop -r=eu-frankfurt-1 -c=brazaletes -k=cluster2 -o=START"
 }
 #
-# for mac, if jq not installed do it (homebrew needed), for othe rplatfforms jq is a prerequisite see documentation
+# for mac, if jq not installed do it (homebrew needed), for other platfforms jq is a prerequisite see documentation
 (brew list jq || brew install jq) >/dev/null 2>&1
 #
 MAX_WAIT_TIME=120
@@ -88,13 +89,13 @@ case $i in
 esac
 done
 #
-if [[ $COMMAND == "START" ]]
-    then
-        WAITSTATE="RUNNING"
-elif [[ $COMMAND == "STOP" ]]
-    then
-        WAITSTATE="STOPPED"
-fi
+#if [[ $COMMAND == "START" ]]
+#    then
+#        WAITSTATE="RUNNING"
+#elif [[ $COMMAND == "STOP" ]]
+#    then
+#        WAITSTATE="STOPPED"
+#fi
 #
 #usage
 #
@@ -175,7 +176,7 @@ do
         do
             nodeid=`echo $nodes | jq .[$i].id`
             nodeid=$(eval echo $nodeid)
-            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid --wait-for-state $WAITSTATE --max-wait-seconds $MAX_WAIT_TIME --profile $PROFILE --auth security_token"
+            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid --profile $PROFILE --auth security_token"
             echo "      ${COMMAND}ing node $nodeid"
             # issue command
             ($cmd >/dev/null 2>&1)
