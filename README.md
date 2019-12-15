@@ -3,6 +3,7 @@ A kubectl extension plugin
 
 ## purpose
 Starts or stops all the compute nodes of an OKE cluster
+16/dec/2019: updated with script for stand alone use
 ## notes
 Unlike standard oci CLI commands, we use pretty names and the tool  
 seeks for the internal ocids for you.  
