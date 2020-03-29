@@ -1,0 +1,5 @@
+jq
+https://stedolan.github.io/jq/
+jq is licensed under the MIT license (code) and the CC-BY-3.0 license (docs)
+https://creativecommons.org/licenses/by/3.0/
+
