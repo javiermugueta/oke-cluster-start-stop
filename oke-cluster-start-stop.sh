@@ -1,11 +1,12 @@
 #!/bin/bash
-# 1.0.0     javier.mugueta      15-dic-2019    new
-
+# 1.0.0     javier.mugueta      15-dic-2019   new
+# 1.0.1     javier.mugueta      29-mar-2020   bug resolved, it ws not honoring the region parameter  
+#
 #
 # Copyright (c) 2019 javier mugueta
 #
 # The Universal Permissive License (UPL), Version 1.0
-
+#
 # Subject to the condition set forth below, permission is hereby granted to any
 # person obtaining a copy of this software, associated documentation and/or data
 # (collectively the "Software"), free of charge and under any and all copyright
@@ -13,18 +14,18 @@
 # licensable by each licensor hereunder covering either (i) the unmodified
 # Software as contributed to or provided by such licensor, or (ii) the Larger
 # Works (as defined below), to deal in both
-
+#
 # (a) the Software, and
 # (b) any piece of software and/or hardware listed in the lrgrwrks.txt file if
 # one is included with the Software (each a "Larger Work" to which the Software
 # is contributed by such licensors),
-
+#
 # without restriction, including without limitation the rights to copy, create
 # derivative works of, display, perform, and distribute the Software and make,
 # use, sell, offer for sale, import, export, have made, and have sold the
 # Software and the Larger Work(s), and to sublicense the foregoing rights on
 # either these or other terms.
-
+#
 # This license is subject to the following condition:
 # The above copyright notice and either this complete permission notice or at
 # a minimum a reference to the UPL must be included in all copies or
@@ -52,7 +53,6 @@ usage(){
 (brew list jq || brew install jq) >/dev/null 2>&1
 #
 MAX_WAIT_TIME=120
-PROFILE="DEFAULT"
 #
 if [[ "$#" -ne 4 ]]; then
     echo
@@ -106,7 +106,7 @@ echo ""
 #
 #
 # get compartment ocid from pretty name
-compartments_data=`oci iam compartment list --profile $PROFILE  --all`
+compartments_data=`oci iam compartment list --all`
 compartments_list=`echo $compartments_data | jq .data`
 compartments_count=`echo $compartments_data | jq '.data | length'`
 for i in $(eval echo {0..$compartments_count})
@@ -122,7 +122,7 @@ do
     fi
 done
 # list of oke clusters
-clusterinfo=`oci ce cluster list --compartment-id $compartment_id --profile $PROFILE `
+clusterinfo=`oci ce cluster list --compartment-id $compartment_id --region $REGION`
 count=`echo $clusterinfo | jq '.data | length'`
 count=`expr $count - 1`
 for i in $(eval echo {0..$count})
@@ -138,7 +138,7 @@ do
     fi
 done
 # list of nodepools
-nodepoolinfo=`oci ce node-pool list --compartment-id $compartment_id --profile $PROFILE `
+nodepoolinfo=`oci ce node-pool list --compartment-id $compartment_id --region $REGION`
 nodepoolinfo="${nodepoolinfo//cluster-id/cluster_id}"
 count=`echo $nodepoolinfo | jq '.data | length'`
 count=`expr $count - 1`
@@ -154,7 +154,7 @@ do
     then
         echo "Cluster $CLUSTER found!"
         # get the compute nodes of each pool
-        data=`oci ce node-pool get --node-pool-id $id --profile $PROFILE `
+        data=`oci ce node-pool get --node-pool-id $id --region $REGION`
         count=`echo $data | jq '.data.nodes | length'`
         count=`expr $count - 1`
         nodes=`echo $data | jq .data.nodes`
@@ -163,7 +163,7 @@ do
         do
             nodeid=`echo $nodes | jq .[$i].id`
             nodeid=$(eval echo $nodeid)
-            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid  --profile $PROFILE "
+            cmd="oci compute instance action --action $COMMAND --instance-id $nodeid --region $REGION"
             echo "      ${COMMAND}ing node $nodeid"
             # issue command
             ($cmd >/dev/null 2>&1)
