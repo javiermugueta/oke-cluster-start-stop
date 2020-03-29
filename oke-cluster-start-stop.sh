@@ -1,6 +1,6 @@
 #!/bin/bash
 # 1.0.0     javier.mugueta      15-dic-2019   new
-# 1.0.1     javier.mugueta      29-mar-2020   bug resolved, it ws not honoring the region parameter  
+# 1.0.1     javier.mugueta      29-mar-2020   bug resolved, script was not honoring the region parameter  
 #
 #
 # Copyright (c) 2019 javier mugueta
