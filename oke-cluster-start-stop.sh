@@ -1,7 +1,7 @@
 #!/bin/bash
 # 1.0.0     javier.mugueta      15-dic-2019   new
 # 1.0.1     javier.mugueta      29-mar-2020   bug resolved, script was not honoring the region parameter  
-#
+# 1.0.2     javier.mugueta      09-mar-2023   get compartment ocid from pretty name in a single line of code
 #
 # Copyright (c) 2019 javier mugueta
 #
@@ -106,21 +106,8 @@ echo ""
 #
 #
 # get compartment ocid from pretty name
-compartments_data=`oci iam compartment list --all`
-compartments_list=`echo $compartments_data | jq .data`
-compartments_count=`echo $compartments_data | jq '.data | length'`
-for i in $(eval echo {0..$compartments_count})
-do
-    # Issue #1: putting "" in name as jq processes hypen as math operator
-    name=`echo $compartments_list | jq .[$i]."name"`
-    name=$(eval echo $name)
-    if [[ $COMPARTMENT == $name ]]
-    then
-        echo "Compartment $name found!"
-        compartment_id=`echo $compartments_list | jq .[$i].id`
-        compartment_id=$(eval echo $compartment_id)
-    fi
-done
+compartment_id=$(oci iam compartment list --compartment-id-in-subtree true --all | jq --arg compname "$COMPARTMENT" '.data[] | select(."name"==$compname)' | jq -r ."id")
+
 # list of oke clusters
 clusterinfo=`oci ce cluster list --compartment-id $compartment_id --region $REGION`
 count=`echo $clusterinfo | jq '.data | length'`
