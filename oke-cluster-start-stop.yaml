@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: oke-cluster-start-stop
 spec:
-  version: "v1.0.4"
+  version: "v1.0.3"
   platforms:
   - selector:
       matchExpressions:
