@@ -3,13 +3,13 @@ kind: Plugin
 metadata:
   name: oke-cluster-start-stop
 spec:
-  version: "v1.0.1"
+  version: "v1.0.4"
   platforms:
   - selector:
       matchExpressions:
       - {key: os, operator: In, values: [darwin, linux]}
-    uri: https://github.com/javiermugueta/oke-cluster-start-stop/releases/download/1.0.0/oke-cluster-start-stop-1.0.0.zip
-    sha256: "2dd885ee706009b340ed1f3d9de2d342410879c0c957f2f540955eddf477a19e"
+    uri: https://github.com/javiermugueta/oke-cluster-start-stop/blob/master/oke-cluster-start-stop-1.0.4.zip
+    sha256: "54f50a801ba7cd568d7ff5e7295207a5a2e5d003c58bc39d28a768030cdaf809"
     files:
     - from: "./kubectl-oke-cluster-start-stop"
       to: "."
