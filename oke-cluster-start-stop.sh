@@ -2,6 +2,7 @@
 # 1.0.0     javier.mugueta      15-dic-2019   new
 # 1.0.1     javier.mugueta      29-mar-2020   bug resolved, script was not honoring the region parameter  
 # 1.0.2     javier.mugueta      09-mar-2023   get compartment ocid from pretty name in a single line of code
+# 1.0.3     javier.mugueta      12-mar-2023   get cluster ocid from pretty name in a single line of code
 #
 # Copyright (c) 2019 javier mugueta
 #
@@ -42,7 +43,7 @@
 usage(){
     echo "Usage:"
     echo "      kubectl oke-cluster-start-stop -r=[region] -c=[compartment name] -k=[k8s cluster] -o=[START|STOP]"
-    echo "      -r=[region], one of {ca-toronto-1, eu-frankfurt-1, uk-london-1, us-ashburn-1, us-gov-ashburn-1, us-gov-chicago-1, us-gov-phoenix-1, us-langley-1, us-luke-1, us-phoenix-1}"
+    echo "      -r=[region], one of {ca-toronto-1, eu-frankfurt-1, uk-london-1, us-ashburn-1, us-gov-ashburn-1, us-gov-chicago-1, us-gov-phoenix-1, us-langley-1, us-luke-1, us-phoenix-1, after 3+ years more regions available now ...}"
     echo "      -o=[START|STOP]"
     echo "      -k=[name (case sensitive) of the k8s cluster]"
     echo "      -c=[compartment name (case sensitive) of the compartment the cluster belongs to]"
@@ -108,23 +109,13 @@ echo ""
 # get compartment ocid from pretty name
 compartment_id=$(oci iam compartment list --compartment-id-in-subtree true --all | jq --arg compname "$COMPARTMENT" '.data[] | select(."name"==$compname)' | jq -r ."id")
 
-# list of oke clusters
-clusterinfo=`oci ce cluster list --compartment-id $compartment_id --region $REGION`
-count=`echo $clusterinfo | jq '.data | length'`
-count=`expr $count - 1`
-for i in $(eval echo {0..$count})
-do
-    name=`echo $clusterinfo | jq .data[$i].name`
-    name=$(eval echo $name)
-    if [[ $CLUSTER == $name ]]
-    then
-        id=`echo $clusterinfo | jq .data[$i].id`
-        id=$(eval echo $id)
-        # got the id of the cluster I wanna operate with
-        CLUSTER_ID=$id
-    fi
-done
-# list of nodepools
+echo "Compartment ocid: "$compartment_id
+
+# get cluster ocid
+CLUSTER_ID=$(oci ce cluster list --compartment-id $compartment_id --region $REGION | jq --arg clustername "$CLUSTER" '.data[] | select(."name"==$clustername)' | jq -r ."id")
+echo "Cluster ocid: "$CLUSTER_ID
+
+# get list of nodepools
 nodepoolinfo=`oci ce node-pool list --compartment-id $compartment_id --region $REGION`
 nodepoolinfo="${nodepoolinfo//cluster-id/cluster_id}"
 count=`echo $nodepoolinfo | jq '.data | length'`
